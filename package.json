@@ -1,0 +1,19 @@
+{
+  "name": "block40backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/darylhb28/Block-40-Market---Back-End.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/darylhb28/Block-40-Market---Back-End/issues"
+  },
+  "homepage": "https://github.com/darylhb28/Block-40-Market---Back-End#readme",
+  "description": ""
+}
