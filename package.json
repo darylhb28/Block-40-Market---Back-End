@@ -1,9 +1,16 @@
 {
   "name": "block40backend",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
+  "type": "module",
+    "imports": {
+    "#*": "./*.js"
+    },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node --watch --env-file=.env server.js",
+    "db:schema": "psql -d tasklist -f db/schema.sql",
+    "db:seed": "node --env-file=.env db/seed.js",
+    "db:reset": "npm run db:schema && npm run db:seed"
   },
   "repository": {
     "type": "git",
@@ -15,5 +22,11 @@
     "url": "https://github.com/darylhb28/Block-40-Market---Back-End/issues"
   },
   "homepage": "https://github.com/darylhb28/Block-40-Market---Back-End#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.16.0"
+  }
 }
