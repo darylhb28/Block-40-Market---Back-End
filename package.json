@@ -3,12 +3,9 @@
   "version": "1.0.0",
   "main": "server.js",
   "type": "module",
-    "imports": {
-    "#*": "./*.js"
-    },
   "scripts": {
     "start": "node --watch --env-file=.env server.js",
-    "db:schema": "psql -d tasklist -f db/schema.sql",
+    "db:schema": "psql -d market -f db/schema.sql",
     "db:seed": "node --env-file=.env db/seed.js",
     "db:reset": "npm run db:schema && npm run db:seed"
   },
