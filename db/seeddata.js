@@ -66,17 +66,20 @@ export const reviews = [
   {
     rating: 5,
     comment: 'Absolutely loved this coffee! Smooth, rich, and aromatic. Will definitely order again.',
-    product_id: 1
+    product_id: 1,
+    user_id: 1
   },
   {
     rating: 4,
     comment: 'Great flavor, but a little too strong for my taste. Perfect for espresso lovers though.',
-    product_id: 6
+    product_id: 6,
+    user_id: 1
   },
   {
     rating: 3,
     comment: 'Decent coffee, but not as fresh as I expected. Packaging was nice though.',
-    product_id: 3
+    product_id: 3,
+    user_id: 1
   }
 ];
 
