@@ -31,6 +31,9 @@ CREATE TABLE reviews (
     id SERIAL PRIMARY KEY,
     rating INTEGER NOT NULL,
     comment TEXT NOT NULL,
+    user_id INTEGER NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+    ON DELETE CASCADE,
     product_id INTEGER NOT NULL,
     FOREIGN KEY (product_id) REFERENCES products(id)
     ON DELETE CASCADE
