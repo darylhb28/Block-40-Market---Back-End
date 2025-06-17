@@ -1,6 +1,6 @@
 import express from "express"
-import { verifyToken } from "../app"
-import { getProduct, getProducts } from "../db/queries/products";
+import { verifyToken } from "../app.js"
+import { getProduct, getProducts } from "../db/queries/products.js";
 const router = express.Router()
 
 router.post('/', verifyToken, async(req, res) =>{
