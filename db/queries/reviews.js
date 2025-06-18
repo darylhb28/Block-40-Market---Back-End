@@ -10,3 +10,9 @@ const {rows:[review]} = await db.query(sql, [rating, comment, product_id, user_i
 return review
 
 }
+
+export async function getReviewByProductId(product_id){
+    const result = await db.query('SELECT * FROM reviews WHERE product_id = $1;',
+    [product_id]);
+    return result.rows;
+}

@@ -1,6 +1,7 @@
 import express from "express"
 import { verifyToken } from "../app.js"
 import { createProduct, deleteProduct, getProduct, getProducts, updateProduct } from "../db/queries/products.js";
+import { createReview, getReviewByProductId } from "../db/queries/reviews.js";
 const router = express.Router()
 
 router.post('/', verifyToken, async(req, res) =>{
@@ -30,7 +31,7 @@ router.route('/:id').get(async(req, res) =>{
 
     const product = await getProduct(id);
     if(!product)
-        return res.setMaxListeners(404).send({error: 'Product not found'});
+        return res.status(404).send({error: 'Product not found'});
     res.send(product);
 });
 
@@ -54,13 +55,14 @@ router.route("/:id").put(async(req, res)=>{
         return res.status(400).send({error: "Invalid Input"});
     }
 
-    const exsisting = await getProduct(id);
-    if(!exsisting) return res.status(404).send({error: "Product not found"});
+    const existing = await getProduct(id);
+    if(!existing) return res.status(404).send({error: "Product not found"});
 
     const updated = await updateProduct({id, title, price, description});
     res.send(updated);
 });
 
+//DELETE delete product
 router.route("/:id").delete(async(req, res) =>{
     const id = Number(req.params.id);
     if(!Number.isInteger(id) || id <= 0) {
@@ -71,6 +73,41 @@ router.route("/:id").delete(async(req, res) =>{
     if(!deleted) return res.status(404).send({error: "Product not found"});
 
     res.sendStatus(204);
+})
+
+//GET product review by product id
+router.route("/:id/reviews").get(async(req, res) => {
+    const id = Number(req.params.id);
+    if(!Number.isInteger(id) || id <= 0) {
+        return res.status(400).send({error: 'Invalid ID'});
+    }
+
+    const review = await getReviewByProductId(id);
+    if(!review)
+        return res.status(404).send({error: 'Product not found'});
+    
+    res.status(200).send(review);
+})
+
+
+// POST create new review by product id
+router.route("/:id/reviews").post(verifyToken, async(req, res) => {
+    const id = Number(req.params.id);
+    if(!Number.isInteger(id) || id <= 0) {
+        return res.status(400).send({error: 'Invalid ID'});
+    }
+
+    const product = await getProduct(id);
+    if(!product)
+        return res.status(404).send({error: 'Product not found'});
+
+    const { rating, comment } = req.body;
+    if (!rating || !comment ){
+        return res.status(400).send({error: "Missing required fields"});
+    }
+
+    const newReview = await createReview({ rating, comment, product_id: id, user_id: req.user.id });
+    res.status(201).send(newReview);
 })
 
 
