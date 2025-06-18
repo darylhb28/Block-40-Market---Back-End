@@ -1,10 +1,13 @@
 import express from 'express'
 import jwt from "jsonwebtoken"
+import cors from "cors"
 const app = express()
 export default app
 import usersRouter from "./api/users.js"
 import productsRouter from "./api/products.js"
 import ordersRouter from "./api/orders.js"
+
+app.use(cors());
 
 app.use(express.json())
 
