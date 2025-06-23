@@ -18,7 +18,7 @@ router.post("/", verifyToken, async (req, res, next) => {
       note,
       user_id: req.user.id
     });
-    res.status(201).send(newOrder);
+    res.status(201).json(newOrder);
   } catch (err) {
     next(err);
   }
@@ -28,7 +28,7 @@ router.post("/", verifyToken, async (req, res, next) => {
 router.get("/", verifyToken, async (req, res, next) => {
   try {
     const orders = await getOrdersByUser(req.user.id);
-    res.send(orders);
+    res.json(orders);
   } catch (err) {
     next(err);
   }
@@ -52,7 +52,7 @@ router.get("/:id", verifyToken, async (req, res, next) => {
       return res.status(403).send({ error: "Unauthorized access to this order" });
     }
 
-    res.send(order);
+    res.json(order);
   } catch (err) {
     next(err);
   }
