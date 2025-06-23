@@ -17,7 +17,7 @@ if (!username || !password) {
 const newUser = await createUser({username, password})
 const token = jwt.sign({id: newUser.id, username: newUser.username}, process.env.JWT_SECRET)
 
-res.status(200).send(token)
+res.status(200).json(token)
 })
 
 //POST /users/login
@@ -44,13 +44,13 @@ router.route("/login").post(async (req, res, next) => {
     { id: realUserInfo.id, username: realUserInfo.username },
     process.env.JWT_SECRET
   );
-  res.status(200).send(token);
+  res.status(200).json(token);
 });
 
 
 //🔒 GET /users/me
 router.route("/me").get(verifyToken, async(req,res,next)=>{
 const userInfo = await getUserById({id: req.user.id})
-res.status(200).send(userInfo)
+res.status(200).json(userInfo)
 
 })
