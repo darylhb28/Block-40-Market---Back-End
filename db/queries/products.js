@@ -37,7 +37,7 @@ export async function updateProduct({ id, title, price, description }){
     WHERE id = $4
     RETURNING *;
     `
-    const {rows} = await db.quewry(sql, [title, price, description, id]);
+    const {rows} = await db.query(sql, [title, price, description, id]);
     return rows[0];
 }
 
